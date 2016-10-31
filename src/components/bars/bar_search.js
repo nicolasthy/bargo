@@ -17,16 +17,29 @@ class BarSearch extends Component {
         return suggest.placeId == bar.place_id;
       });
       filteredList = filtered;
+
+      if(filteredList.length == 0) {
+        let bar = {
+          lat: suggest.location.lat,
+          lon: suggest.location.lng,
+          name: suggest.label,
+          place_id: suggest.placeId
+        };
+        return [
+          {
+            new: true,
+            bar: bar
+          }
+        ];
+      }
     }
 
     return filteredList;
   }
 
   onSuggestSelect(suggest) {
-    console.log(suggest);
-    console.log(this.props.bars);
-    var filteredList = this.getFilteredList(suggest, null);
-    this.props.filterList(filteredList, filteredList.length > 0);
+    var filteredList = this.getFilteredList(suggest);
+    this.props.filterList(filteredList, true);
   }
 
   onBlur(value) {

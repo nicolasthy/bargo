@@ -7,6 +7,7 @@ class BeerSearch extends Component {
 
   getFilteredList(e) {
     let checkedList = this.state.checkedList;
+    var filteredList = [];
 
     if(checkedList.includes(parseInt(e.target.value))) {
       let index = checkedList.indexOf(parseInt(e.target.value));
@@ -15,15 +16,24 @@ class BeerSearch extends Component {
       }
 
       this.setState({checkedList});
+      this.props.filterList(filteredList, false);
 
-      console.log(this.state.checkedList);
       return false;
     }
 
     checkedList.push(parseInt(e.target.value));
     this.setState({checkedList});
 
-    console.log(this.state.checkedList);
+    var filtered = this.props.bars.filter(function(bar) {
+      return bar.beers.some(function(beer) {
+        return beer.id === parseInt(e.target.value);
+      });
+    });
+
+    filteredList = filtered;
+
+    this.props.filterList(filteredList, true);
+
   }
 
   renderBeer(beer) {
