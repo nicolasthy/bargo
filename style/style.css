@@ -20,7 +20,7 @@
   width: 100%;
   min-width: 300px;
   border-radius: 5px;
-  padding: 1.25rem 1.25rem 1.25rem 255px !important;
+  padding: 1.25rem 1.25rem 1.25rem 275px !important;
   border: 1px solid rgba(0,0,0,.07);
   box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
   transition: .2s ease-in;
@@ -32,7 +32,12 @@
 }
 
 .card-icon {
-  
+  position: absolute;
+  top: 10px;
+  left: 235px;
+  border-radius: 50px;
+  background: #fff;
+  padding: 5px;
 }
 
 .bargo-place-thumb {

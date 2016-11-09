@@ -40,7 +40,7 @@ class BarItem extends Component {
       return (
         <div className="card card-block">
           {this.renderPlacePhoto(place)}
-          <img className="card-icon" src={place.icon} height="20px" width="20px" />
+          <img className="card-icon" src={place.icon} height="25px" width="25px" />
           <h4 className="card-title">{bar.name}</h4>
           <div>{place.vicinity}</div>
           <div>{place.formatted_phone_number}</div>
