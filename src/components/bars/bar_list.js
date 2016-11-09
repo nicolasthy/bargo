@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 
 import BarSearch from './bar_search';
+import BarItem from './bar_item';
 
 class BarList extends Component {
   state = {
     filteredList: this.props.bars,
     isFiltered: false,
-    error: false
+    error: false,
+    lazy: true
   };
 
   componentWillMount() {
@@ -17,17 +19,15 @@ class BarList extends Component {
 
   handleNewBar(e) {
     e.preventDefault();
+    this.props.createBar(this.state.filterList);
     this.setState({
       filteredList: [],
       isFiltered: false,
       error: false
     });
-    this.props.createBar(this.state.filterList);
-    this.props.fetchBars();
   }
 
   filterList(array, status) {
-    console.log(array);
     if(array[0].new) {
       this.setState({
         filterList: array[0].bar,
@@ -43,19 +43,39 @@ class BarList extends Component {
     }
   }
 
-  renderBar(bar) {
-    return (
-      <div className="card card-block" key={bar.place_id}>
-        <h4 className="card-title">{bar.name}</h4>
-      </div>
-    );
+  renderBar(bar, index) {
+    if (this.state.lazy) {
+      if(index < 7) {
+        return <BarItem key={index} bar={bar} />;
+      }
+    } else {
+      return (
+        <div className="card card-block" key={bar.id}>
+          <h4 className="card-title">{bar.name}</h4>
+        </div>
+      );
+    }
+  }
+
+  renderMore() {
+    this.setState({ lazy: false });
+  }
+
+  renderMoreAction() {
+    if(this.state.lazy && Object.keys(this.props.bars).length > 7) {
+      return (
+        <a href="#loadMore" onClick={this.renderMore.bind(this)}>Load More...</a>
+      );
+    }
   }
 
   renderList() {
+    // console.log(this.props.bars);
     if(!this.state.error) {
       return (
         <div className="bar-list">
-          {this.state.isFiltered ? this.state.filteredList.map(this.renderBar) : this.props.bars.map(this.renderBar)}
+          {this.state.isFiltered ? this.state.filteredList.map(this.renderBar.bind(this)) : this.props.bars.map(this.renderBar.bind(this))}
+          {this.renderMoreAction()}
         </div>
       );
     }

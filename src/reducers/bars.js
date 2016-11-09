@@ -8,7 +8,9 @@ export default function(state = [], action) {
     case FETCH_BARS:
       return [ ...state, ...action.payload.data ];
     case CREATE_BAR:
-      return { ...state, ...[action.payload.data] };
+      return [ ...state, action.payload.data ];
+    default:
+      return state;
   }
 
   return state;
