@@ -2,11 +2,18 @@ BarGo
 ============
 [![GitHub Stars](https://img.shields.io/github/stars/nicolasthy/bargo.svg)](https://github.com/nicolasthy/bargo/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/nicolasthy/bargo.svg)](https://github.com/nicolasthy/bargo/issues) [![Current Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/nicolasthy/bargo)
 
-TODO: Write a project description
+Find any bar and see what kind of beers they have in stock !
+School project based on a [Java API](https://github.com/Mosquibeat/bargo-api)
 
 ## Installation
 
-TODO: Describe the installation process
+Clone the project and then install the dependencies:
+```
+git clone git@github.com:nicolasthy/bargo.git
+cd bargo
+npm install
+npm start
+```
 
 ## Usage
 
